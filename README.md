@@ -1,6 +1,8 @@
 # python_range_demo
 shoot range of leak
+
 python version: 3.8
+
 Django version: 3.2.2
 
 api-1
