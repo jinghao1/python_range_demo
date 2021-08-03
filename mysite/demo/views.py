@@ -25,3 +25,9 @@ def index_post_r(request):
         endData['content'] = f.read()
         f.close()
     return JsonResponse(endData)
+
+
+def no_hook_fun(request):
+    return JsonResponse({
+        "status": "201"
+    })
