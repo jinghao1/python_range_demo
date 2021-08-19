@@ -1,3 +1,4 @@
+
 {
   "sources": {
     "django":
@@ -9,6 +10,7 @@
               {
                 "instance_method": true,
                 "method_name": "get",
+                "signature": "django.utils.datastructures.MultiValueDict.get()",
                 "hook_type": "property",
                 "target": "RETURN",
                 "type": "URI",
@@ -19,6 +21,7 @@
                {
                 "instance_method": true,
                 "method_name": "__getitem__",
+                 "signature": "django.utils.datastructures.__getitem__()",
                 "hook_type": "property",
                 "target": "RETURN",
                 "type": "URI",
@@ -39,6 +42,7 @@
           {
             "instance_method": true,
             "method_name": "capitalize",
+            "signature": "builtins.str.capitalize()",
             "hook_type": "property",
             "source": "OBJ",
             "target": "RETURN",
@@ -48,6 +52,7 @@
            {
             "instance_method": true,
             "method_name": "format",
+             "signature": "builtins.str.format()",
              "hook_type": "property",
             "source": "OBJ,ALL_ARGS,ALL_KWARGS",
 
@@ -56,6 +61,7 @@
           {
             "instance_method": true,
             "method_name": "__add__",
+             "signature": "builtins.str.__add__()",
              "hook_type": "property",
             "source": "OBJ,ALL_ARGS,ALL_KWARGS",
 
@@ -64,6 +70,7 @@
           {
             "instance_method": true,
             "method_name": "join",
+            "signature": "builtins.str.join()",
             "hook_type": "property",
             "source": "OBJ,ARG_0",
 
@@ -87,7 +94,7 @@
         {
           "module": "builtins",
           "method_name": "open",
-          "signature": "os.open()",
+          "signature": "builtins.open()",
           "hook_type": "function",
           "source": "ARG_0,KWARG:file",
           "python2_only": true,

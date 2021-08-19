@@ -44,7 +44,6 @@ class FireMiddleware(MiddlewareMixin):
         # else:
         #     logger.info("python agent hook close")
 
-
     def process_request(self, request):
         # '''产生request对象后，url匹配之前调用'''
         func_id = id(request)
@@ -52,27 +51,32 @@ class FireMiddleware(MiddlewareMixin):
         reg_agent_id = dt_global_var.dt_get_value("agent_id")
         req_count = dt_global_var.dt_get_value("req_count") + 1
         dt_global_var.dt_set_value("req_count", req_count)
-        dt_tracker_set("agent_id", reg_agent_id)
-        dt_tracker_set("http_protocol", request.META.get("SERVER_PROTOCOL", "'HTTP/1.1'"))
-        dt_tracker_set("http_client_ip", request.META.get("REMOTE_ADDR", "127.0.0.1"))
-        dt_tracker_set("context_path", request.META.get("PATH_INFO", "/"))
-        dt_tracker_set("http_query_string", request.META.get("QUERY_STRING", ""))
-        dt_tracker_set("http_uri", request.path)
-        http_url = request.scheme + "://" + request.META.get("HTTP_HOST", "")+request.META.get("PATH_INFO", "")
+        http_url = request.scheme + "://" + request.META.get("HTTP_HOST", "") + request.META.get("PATH_INFO", "")
         if request.META.get("QUERY_STRING", ""):
             http_url += "?" + request.META.get("QUERY_STRING", "")
-        dt_tracker_set("http_url", http_url)
-        dt_tracker_set("http_method", request.META.get("REQUEST_METHOD", "None"))
-        dt_tracker_set("app_name", request.META.get("IDE_PROJECT_ROOTS", ""))
         http_req_header = self.agent_upload.agent_json_to_str(dict(request.headers))
-        dt_tracker_set("http_req_header", http_req_header)
-
         if request.body and isinstance(request.body, str):
             reqeust_body = str(request.body, encoding="utf-8")
         else:
             reqeust_body = ""
-        dt_tracker_set("http_body", reqeust_body)
-        dt_tracker_set("http_scheme", request.scheme)
+
+        need_to_set = {
+            "agent_id": reg_agent_id,
+            "http_protocol": request.META.get("SERVER_PROTOCOL", "'HTTP/1.1'"),
+            "http_client_ip": request.META.get("REMOTE_ADDR", "127.0.0.1"),
+            "context_path": request.META.get("PATH_INFO", "/"),
+            "http_query_string": request.META.get("QUERY_STRING", ""),
+            "http_uri": request.path,
+            "http_url": http_url,
+            "http_method": request.META.get("REQUEST_METHOD", "None"),
+            "app_name": request.META.get("IDE_PROJECT_ROOTS", ""),
+            "http_req_header": http_req_header,
+            "http_body": reqeust_body,
+            "http_scheme": request.scheme,
+        }
+        for key in need_to_set.keys():
+            dt_tracker_set(key, need_to_set[key])
+
         logger.info("hook request api success")
 
     # def process_view(self, request, view_func, *view_args, **view_kwargs):

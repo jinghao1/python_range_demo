@@ -41,9 +41,10 @@ def proxy_builtin(klass):
 # 普通方法 hook
 class _InstallFcnHook(object):
 
-    def __init__(self, fcn, signature=None):
+    def __init__(self, fcn, signature=None, source=False):
         self.signature = signature
         self._fcn = fcn
+        self.source = source
 
     def _pre_hook(self, *args, **kwargs):
         # 入参 hook
@@ -62,7 +63,7 @@ class _InstallFcnHook(object):
         self._pre_hook(*args, **kwargs)
         retval = self._fcn(*args, **kwargs)
 
-        method_pool_data(self._fcn.__module__, self._fcn, args[0], retval, signature=self.signature )
+        method_pool_data(self._fcn.__module__, self._fcn, args[0], retval, source=self.source, signature=self.signature)
         return retval
 
 

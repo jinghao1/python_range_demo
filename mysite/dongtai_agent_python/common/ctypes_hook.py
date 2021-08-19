@@ -16,24 +16,8 @@ def magic_flush_mro_cache():
     ctypes.PyDLL(None).PyType_Modified(ctypes.cast(id(object), ctypes.py_object))
 
 
-def new_format(*args, **kwargs):
-    print("=========")
-    print("args:" + str(args))
-    result = copyStr.format(*args, **kwargs)
-    print("result:" + str(result))
-    return result
-
-
-def new_join(*args, **kwargs):
-    print("=====join====")
-    print("args:" + str(args))
-    result = copyStr.join(*args, **kwargs)
-    print("result:" + str(result))
-    return result
-
 # 属性方法hook
-
-def new_func(origin_cls, method_name, *args, **kwargs):
+def new_func(origin_cls, method_name,signature=None,source=True, *args, **kwargs):
 
     copyNewStr = type(origin_cls.__name__, origin_cls.__bases__, dict(origin_cls.__dict__))
 
@@ -43,10 +27,14 @@ def new_func(origin_cls, method_name, *args, **kwargs):
             print("hook method name : " + str(method_name))
             print("begin......." + str(method_name))
             print(args)
-        # method_pool_data(self._fcn.__module__, self._fcn, args[0], retval, signature=self.signature )
+        _fcn = getattr(origin_cls, method_name)
+        # tain_in = json.dumps(tain_arr)
+        # 入参检测
+        method_pool_data(_fcn.__module__, _fcn, args[0], result, source=source, signature=signature )
 
         return result
     return newnwe_func
+
 
 class hookLazyImport:
     def __init__(self, module_name,fromlist=[]):

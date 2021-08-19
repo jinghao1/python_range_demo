@@ -17,6 +17,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/dongtai_agent_python/middlewares/django_middleware.py">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>

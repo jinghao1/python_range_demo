@@ -1,0 +1,29 @@
+{
+  "data": [
+    {
+      "value": "django.utils.datastructures.MultiValueDict.get",
+      "source": true
+    },
+    {
+      "value": "django.utils.datastructures.MultiValueDict.__getitem__",
+      "source": true
+    },
+    {
+      "value": "builtins.str.format",
+      "source": true
+    },
+    {
+      "value": "builtins.str.__add__",
+      "source": true
+    },
+    {
+      "value": "builtins.str.join",
+      "source": true
+    },
+    {
+      "value": "builtins.open",
+      "source": true
+    }
+
+  ]
+}
